@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Built For Justin Welsh · AG1 Consulting</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0805;--bg-2:#110e0a;--surface:#1a160f;--surface-2:#221c12;--line:rgba(201,151,58,.15);--line-2:rgba(201,151,58,.3);--text:#f8f3e8;--muted:#a69885;--gold:#c9973a;--gold-2:#e2b96a;--gold-3:#f0d79a;--red:#c97a3a}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;line-height:1.65;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(circle,rgba(201,151,58,.025) 1px,transparent 1px);background-size:24px 24px;pointer-events:none;z-index:0}
+body::after{content:'';position:fixed;top:-30%;right:-10%;width:70%;height:80%;background:radial-gradient(circle,rgba(201,151,58,.07) 0%,transparent 60%);pointer-events:none;z-index:0}
+.container{max-width:1100px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+.container-narrow{max-width:820px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+nav{padding:24px 0;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(10,8,5,.94);backdrop-filter:blur(14px);z-index:100}
+.nav-inner{display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:800;font-size:18px;background:linear-gradient(135deg,var(--gold) 0%,var(--gold-3) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:.18em;text-transform:uppercase}
+.nav-cta{padding:10px 22px;background:linear-gradient(135deg,var(--gold) 0%,var(--gold-2) 100%);color:#0a0805;border-radius:8px;text-decoration:none;font-weight:700;font-size:14px}
+section{padding:80px 0}
+.hero{padding:100px 0 60px;text-align:center}
+.eyebrow{display:inline-block;padding:6px 16px;background:rgba(201,151,58,.1);border:1px solid rgba(201,151,58,.3);border-radius:24px;font-size:12px;font-weight:600;color:var(--gold-2);letter-spacing:.2em;text-transform:uppercase;margin-bottom:28px}
+h1{font-size:clamp(40px,5.6vw,64px);font-weight:800;line-height:1.06;letter-spacing:-.03em;margin-bottom:24px}
+h1 em{font-style:normal;background:linear-gradient(135deg,var(--gold) 0%,var(--gold-3) 50%,var(--gold-2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+h2{font-size:clamp(28px,3.8vw,40px);font-weight:700;line-height:1.15;letter-spacing:-.02em;margin-bottom:16px}
+.section-sub{color:var(--muted);font-size:18px;margin-bottom:48px;max-width:680px}
+h3{font-size:22px;font-weight:700;color:var(--text);margin-bottom:10px}
+h4{font-size:14px;color:var(--gold-2);text-transform:uppercase;letter-spacing:.14em;margin:24px 0 12px;font-weight:700}
+p{color:var(--muted);font-size:17px;max-width:680px}
+.hero p{font-size:19px;margin:0 auto 40px;color:var(--muted)}
+.meta-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:56px;padding:32px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.meta-item{text-align:center}
+.meta-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.15em;margin-bottom:10px}
+.meta-value{font-size:20px;color:var(--text);font-weight:700;background:linear-gradient(135deg,var(--gold) 0%,var(--gold-3) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.prose p{margin-bottom:18px;font-size:17px}
+.prose p:last-child{margin-bottom:0}
+.prose strong{color:var(--text);font-weight:600}
+.prose blockquote{margin:24px 0;padding:20px 26px;background:rgba(201,151,58,.06);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;font-size:18px;color:var(--text);font-style:italic;line-height:1.55}
+.prose blockquote .quote-attr{display:block;margin-top:10px;font-size:13px;color:var(--gold-2);font-style:normal;letter-spacing:.05em}
+.signature{margin-top:32px;font-size:15px;color:var(--gold-2);font-style:italic}
+.gap-grid{display:grid;grid-template-columns:1fr;gap:18px;margin-top:8px}
+.gap-card{background:linear-gradient(180deg,var(--surface) 0%,var(--bg-2) 100%);border:1px solid var(--line);border-radius:14px;padding:32px;transition:.3s}
+.gap-card:hover{border-color:var(--line-2)}
+.gap-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:4px 10px;border-radius:4px;margin-bottom:14px}
+.gap-tag.critical{background:rgba(201,122,58,.15);color:var(--red);border:1px solid rgba(201,122,58,.3)}
+.gap-tag.high{background:rgba(201,151,58,.12);color:var(--gold-2);border:1px solid rgba(201,151,58,.3)}
+.gap-card h3{margin-bottom:14px}
+.gap-card p{font-size:16px;margin-bottom:14px}
+.gap-card .fix{padding-top:14px;border-top:1px solid var(--line);font-size:15px}
+.gap-card .fix strong{color:var(--gold-2);text-transform:uppercase;letter-spacing:.1em;font-size:12px;display:block;margin-bottom:6px}
+.market-table{display:flex;flex-direction:column;gap:14px;margin-top:8px}
+.market-row{display:grid;grid-template-columns:200px 1fr;gap:32px;padding:24px 28px;background:linear-gradient(180deg,var(--surface) 0%,var(--bg-2) 100%);border:1px solid var(--line);border-radius:12px;align-items:start}
+.market-name{font-weight:700;color:var(--text);font-size:17px}
+.market-price{font-size:13px;color:var(--gold-2);margin-top:4px;letter-spacing:.05em}
+.market-note{font-size:15px;color:var(--muted);line-height:1.6}
+.market-callout{margin-top:24px;padding:24px 28px;background:rgba(201,151,58,.06);border:1px solid var(--line-2);border-radius:12px;font-size:16px;color:var(--text)}
+.market-callout strong{color:var(--gold-2)}
+.phase-block{display:grid;grid-template-columns:120px 1fr;gap:32px;padding:36px 0;border-bottom:1px solid var(--line)}
+.phase-block:last-child{border-bottom:0}
+.phase-num{font-family:monospace;font-size:14px;color:var(--gold-2);letter-spacing:.15em;font-weight:700}
+.phase-num .month{display:block;color:var(--muted);font-size:11px;margin-top:6px;letter-spacing:.1em}
+.phase-content h3{margin-bottom:14px;font-size:24px}
+.phase-content ul{list-style:none;padding:0;margin:14px 0}
+.phase-content li{padding:6px 0 6px 22px;position:relative;color:var(--muted);font-size:16px}
+.phase-content li::before{content:'';width:6px;height:6px;background:var(--gold);border-radius:50%;position:absolute;left:0;top:14px}
+.phase-content .rev-line{margin-top:18px;padding:14px 18px;background:rgba(201,151,58,.06);border-left:2px solid var(--gold);border-radius:0 8px 8px 0;font-size:15px;color:var(--text)}
+.phase-content .rev-line strong{color:var(--gold-2);text-transform:uppercase;letter-spacing:.1em;font-size:11px;display:block;margin-bottom:4px;font-weight:700}
+.rev-table{margin-top:8px;background:linear-gradient(180deg,var(--surface) 0%,var(--bg-2) 100%);border:1px solid var(--line-2);border-radius:14px;padding:32px;overflow:hidden}
+.rev-row{display:grid;grid-template-columns:1fr auto;gap:32px;padding:18px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.rev-row:last-of-type{border-bottom:0}
+.rev-stream{color:var(--muted);font-size:16px}
+.rev-stream strong{color:var(--text);font-weight:600;display:block;margin-bottom:2px}
+.rev-amount{font-size:22px;font-weight:700;color:var(--gold-2);font-family:monospace;white-space:nowrap}
+.rev-total{margin-top:18px;padding-top:24px;border-top:2px solid var(--line-2);display:grid;grid-template-columns:1fr auto;gap:32px;align-items:baseline}
+.rev-total-label{font-size:14px;color:var(--gold-2);text-transform:uppercase;letter-spacing:.15em;font-weight:700}
+.rev-total-amount{font-size:32px;font-weight:800;background:linear-gradient(135deg,var(--gold) 0%,var(--gold-3) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-family:monospace;white-space:nowrap}
+.rev-note{margin-top:24px;padding:20px 24px;background:rgba(201,151,58,.06);border:1px solid var(--line);border-radius:10px;font-size:15px;color:var(--text)}
+.rev-note strong{color:var(--gold-2)}
+.rev-caveat{margin-top:14px;padding:14px 18px;border:1px dashed var(--line-2);border-radius:8px;font-size:13px;color:var(--muted);font-family:'Inter',sans-serif}
+.rev-caveat strong{color:var(--gold-2);text-transform:uppercase;letter-spacing:.12em;font-size:11px;display:block;margin-bottom:4px}
+.proof-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:8px}
+.proof-card{padding:36px;background:linear-gradient(180deg,var(--surface) 0%,var(--bg-2) 100%);border:1px solid var(--line);border-radius:14px}
+.proof-card h3{font-size:20px;margin-bottom:6px}
+.proof-card .role{font-size:12px;color:var(--gold-2);letter-spacing:.15em;text-transform:uppercase;margin-bottom:18px;font-weight:700}
+.proof-card p{font-size:15px;line-height:1.7}
+.offer-block{padding:48px;background:linear-gradient(180deg,var(--surface) 0%,var(--bg-2) 100%);border:1px solid var(--line-2);border-radius:18px}
+.offer-block h3{font-size:24px;margin-bottom:8px}
+.offer-block .scope-intro{color:var(--muted);font-size:16px;margin-bottom:28px}
+.scope-list{list-style:none;padding:0;margin:0}
+.scope-list li{padding:14px 0 14px 36px;position:relative;color:var(--text);font-size:16px;border-bottom:1px solid var(--line)}
+.scope-list li:last-child{border-bottom:0}
+.scope-list li::before{content:'';width:18px;height:18px;border:1.5px solid var(--gold);border-radius:50%;position:absolute;left:0;top:18px;background:rgba(201,151,58,.08)}
+.scope-list li::after{content:'';width:6px;height:10px;border-right:2px solid var(--gold-2);border-bottom:2px solid var(--gold-2);transform:rotate(45deg);position:absolute;left:6px;top:20px}
+.offer-block .price-note{margin-top:32px;padding-top:28px;border-top:1px solid var(--line-2);font-size:15px;color:var(--gold-2);text-align:center}
+.faq-item{border-bottom:1px solid var(--line);padding:0}
+.faq-q{padding:24px 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:24px;font-size:18px;font-weight:600;color:var(--text);transition:.2s}
+.faq-q:hover{color:var(--gold-2)}
+.faq-toggle{width:24px;height:24px;border-radius:50%;border:1px solid var(--line-2);position:relative;flex-shrink:0;transition:.3s}
+.faq-toggle::before,.faq-toggle::after{content:'';position:absolute;background:var(--gold-2);top:50%;left:50%;transition:.3s}
+.faq-toggle::before{width:10px;height:1.5px;transform:translate(-50%,-50%)}
+.faq-toggle::after{width:1.5px;height:10px;transform:translate(-50%,-50%)}
+.faq-item.open .faq-toggle::after{opacity:0}
+.faq-a{max-height:0;overflow:hidden;transition:.4s}
+.faq-item.open .faq-a{max-height:600px;padding-bottom:24px}
+.faq-a p{font-size:16px;color:var(--muted);max-width:none}
+.cta-section{background:linear-gradient(135deg,rgba(201,151,58,.1) 0%,rgba(226,185,106,.04) 100%);border:1px solid rgba(201,151,58,.3);border-radius:24px;padding:80px 60px;text-align:center;margin:40px 0 60px}
+.cta-section h2{max-width:620px;margin:0 auto 20px}
+.cta-section p{margin:0 auto 36px;max-width:560px;font-size:17px}
+.cta-primary{display:inline-block;padding:20px 44px;background:linear-gradient(135deg,var(--gold) 0%,var(--gold-2) 100%);color:#0a0805;text-decoration:none;border-radius:12px;font-weight:700;font-size:16px;box-shadow:0 12px 40px rgba(201,151,58,.3);transition:.2s}
+.cta-primary:hover{transform:translateY(-2px)}
+.cta-sign{margin-top:28px;font-size:14px;color:var(--gold-2);font-style:italic}
+.hero-cta-row{margin-top:36px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.cta-outline{display:inline-block;padding:18px 36px;background:transparent;color:var(--gold-2);text-decoration:none;border:1px solid var(--line-2);border-radius:12px;font-weight:600;font-size:15px;transition:.2s}
+.cta-outline:hover{border-color:var(--gold-2)}
+.footer{padding:48px 0;border-top:1px solid var(--line);text-align:center}
+.footer p{margin:0 auto;font-size:13px;color:var(--muted);letter-spacing:.05em}
+@media(max-width:768px){
+.meta-grid{grid-template-columns:1fr}
+.cta-section{padding:50px 24px}
+.market-row{grid-template-columns:1fr;gap:8px}
+.phase-block{grid-template-columns:1fr;gap:8px}
+.proof-grid{grid-template-columns:1fr}
+.offer-block{padding:32px 24px}
+section{padding:60px 0}
+}
+.moat-callout{margin-top:32px;padding:32px 36px;background:linear-gradient(135deg,rgba(201,151,58,.08) 0%,rgba(226,185,106,.03) 100%);border:1px solid var(--line-2);border-radius:14px}
+.moat-eyebrow{font-size:11px;color:var(--gold-2);text-transform:uppercase;letter-spacing:.18em;font-weight:700;margin-bottom:12px}
+.moat-callout p{font-size:18px;color:var(--text);margin:0;max-width:none;line-height:1.6}
+.moat-callout p strong{color:var(--gold-2)}
+.contrast-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:8px}
+.contrast-card{padding:36px;background:linear-gradient(180deg,var(--surface) 0%,var(--bg-2) 100%);border:1px solid var(--line);border-radius:14px}
+.contrast-card.current{opacity:.7}
+.contrast-card.future{border-color:var(--line-2);background:linear-gradient(180deg,rgba(201,151,58,.06) 0%,var(--bg-2) 100%)}
+.contrast-tag{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:4px 10px;border-radius:4px;margin-bottom:14px;display:inline-block}
+.contrast-card.current .contrast-tag{background:rgba(166,152,133,.15);color:var(--muted);border:1px solid rgba(166,152,133,.3)}
+.contrast-card.future .contrast-tag{background:rgba(201,151,58,.15);color:var(--gold-2);border:1px solid rgba(201,151,58,.3)}
+.contrast-card h3{margin-bottom:18px;font-size:20px}
+.contrast-card ul{list-style:none;padding:0;margin:0}
+.contrast-card li{padding:8px 0 8px 22px;position:relative;color:var(--muted);font-size:15px;line-height:1.6}
+.contrast-card.current li::before{content:'';width:6px;height:6px;background:var(--muted);border-radius:50%;position:absolute;left:0;top:14px;opacity:.5}
+.contrast-card.future li::before{content:'';width:6px;height:6px;background:var(--gold);border-radius:50%;position:absolute;left:0;top:14px}
+.premium-table{margin-top:24px;border-color:var(--line-2)!important;background:linear-gradient(180deg,rgba(201,151,58,.04) 0%,var(--bg-2) 100%)!important}
+.premium-eyebrow{display:inline-block;padding:5px 14px;background:rgba(201,151,58,.15);border:1px solid var(--line-2);border-radius:24px;font-size:11px;font-weight:700;color:var(--gold-2);letter-spacing:.18em;text-transform:uppercase;margin-bottom:18px}
+.asset-table{background:linear-gradient(180deg,var(--surface) 0%,var(--bg-2) 100%);border:1px solid var(--line);border-radius:14px;padding:8px 32px;margin-top:8px}
+.asset-row{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:24px;padding:18px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.asset-row:last-child{border-bottom:0}
+.asset-row.asset-header{padding:24px 0 18px}
+.asset-col-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.15em;font-weight:700}
+.asset-col-label.asset-built-label{color:var(--gold-2)}
+.asset-cat{font-size:14px;color:var(--muted);font-weight:500}
+.asset-val{font-size:17px;font-weight:600}
+.asset-today{color:var(--muted);opacity:.75}
+.asset-built{color:var(--gold-2)}
+.anti-hype{margin-top:32px;padding:32px 36px;background:rgba(0,0,0,.18);border:1px dashed var(--line-2);border-radius:14px}
+.anti-hype-eyebrow{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.18em;font-weight:700;margin-bottom:18px}
+.anti-hype-list{list-style:none;padding:0;margin:0 0 20px}
+.anti-hype-list li{padding:6px 0 6px 26px;position:relative;color:var(--muted);font-size:15px;line-height:1.6}
+.anti-hype-list li::before{content:'×';position:absolute;left:0;top:2px;color:var(--red);font-size:20px;font-weight:700;line-height:1}
+.anti-hype p{font-size:15px;color:var(--text);margin:0;max-width:none;line-height:1.7}
+.anti-hype p strong{color:var(--gold-2)}
+.call-agenda{text-align:left;max-width:520px;margin:0 auto 32px;display:grid;gap:14px}
+.call-agenda-item{display:grid;grid-template-columns:32px 1fr;gap:16px;align-items:start}
+.call-agenda-num{font-family:monospace;color:var(--gold-2);font-weight:700;font-size:14px;padding-top:2px}
+.call-agenda-text{color:var(--text);font-size:15px;line-height:1.6}
+@media(max-width:768px){.contrast-grid{grid-template-columns:1fr}.moat-callout{padding:24px}.asset-table{padding:8px 20px}.asset-row{grid-template-columns:1fr;gap:6px;padding:14px 0}.asset-row.asset-header{display:none}.asset-cat{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--gold-2)}.anti-hype{padding:24px}}
+.floating-cta{position:fixed;bottom:24px;right:24px;padding:16px 28px;background:linear-gradient(135deg,var(--gold) 0%,var(--gold-2) 100%);color:#0a0805;text-decoration:none;border-radius:12px;font-weight:700;font-size:14px;box-shadow:0 12px 40px rgba(201,151,58,.4);z-index:1000;transition:.2s}
+.floating-cta:hover{transform:translateY(-2px)}
+@media(max-width:768px){.floating-cta{bottom:16px;right:16px;padding:14px 22px;font-size:13px}}
+.results-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:8px}
+.result-card{padding:32px 24px;background:linear-gradient(180deg,rgba(201,151,58,.08) 0%,var(--bg-2) 100%);border:1px solid var(--line-2);border-radius:14px;text-align:center}
+.result-stat{font-size:36px;font-weight:800;background:linear-gradient(135deg,var(--gold) 0%,var(--gold-3) 50%,var(--gold-2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-family:monospace;letter-spacing:-.02em;margin-bottom:10px;line-height:1.05}
+.result-label{font-size:13px;color:var(--muted);line-height:1.5;letter-spacing:.02em}
+.proof-disclaimer{margin-top:24px;padding:16px 22px;border:1px dashed var(--line-2);border-radius:10px;font-size:13px;color:var(--muted);text-align:center;letter-spacing:.02em}
+.proof-disclaimer strong{color:var(--gold-2);text-transform:uppercase;letter-spacing:.12em;font-size:11px}
+@media(max-width:768px){.results-grid{grid-template-columns:1fr 1fr}.result-stat{font-size:28px}}
+.reveal{opacity:0;transform:translateY(30px);transition:.8s}
+.reveal.in{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+<nav>
+<div class="container nav-inner">
+<div class="logo">AG1 Consulting</div>
+<a href="https://calendly.com/ag-copy/call-with-andrei" class="nav-cta" target="_blank">Book A Call</a>
+</div>
+</nav>
+
+<section class="hero">
+<div class="container">
+<div class="eyebrow reveal">Built For Justin Welsh</div>
+<h1 class="reveal">Built For <em>Justin Welsh</em><br>AG1 Consulting</h1>
+<p class="reveal">600K+ LinkedIn followers. 175K+ Saturday Solopreneur subscribers. The Creator MBA at $349 selling steady, LinkedIn OS at $99 with 45,000+ alumni, Content OS at $99 alongside it. Three text-only sales pages, a flagship that ends at $349, and the warmest list in the solopreneur category with nowhere to ascend.</p>
+<div class="meta-grid reveal">
+<div class="meta-item"><div class="meta-label">LinkedIn followers</div><div class="meta-value">600K+</div></div>
+<div class="meta-item"><div class="meta-label">Newsletter subscribers</div><div class="meta-value">175K+</div></div>
+<div class="meta-item"><div class="meta-label">LinkedIn OS alumni</div><div class="meta-value">45K+</div></div>
+<div class="meta-item"><div class="meta-label">Cohort tier opportunity</div><div class="meta-value">$540K+/yr</div></div>
+</div>
+<div class="hero-cta-row reveal">
+<a href="https://andrei170.github.io/justin-welsh-mastermind/" target="_blank" class="cta-primary" style="padding:18px 40px;font-size:16px;border-radius:12px;box-shadow:0 12px 40px rgba(201,151,58,.3)">See The Live Demo →</a>
+<a href="https://calendly.com/ag-copy/call-with-andrei" target="_blank" class="cta-outline">Book A Call</a>
+</div>
+</div>
+</section>
+
+<section>
+<div class="container-narrow"><h2 class="reveal">Why This Page Exists</h2>
+<div class="prose reveal">
+<p>You've already built the thing most operators in the creator-economy never get close to. A 175K+ subscriber newsletter. A flagship course that landed $1.6M+ in a single launch window. 45,000+ LinkedIn OS alumni. A Forbes / Business Insider / Entrepreneur press shelf. A brand built on a single sentence the rest of the category now copies: <strong>"one-person business."</strong> You did all of that with zero employees on purpose, and the public scoreboard reads accordingly.</p>
+<p>So this page isn't a "here's how to grow on LinkedIn" pitch. You're past that.</p>
+<blockquote>"Once upon a time, you had a job. You traded your time for money."<span class="quote-attr">- justinwelsh.me/about, your own opener</span></blockquote>
+<p>The pitch this page makes is narrower. After studying the public surfaces (justinwelsh.me, learn.justinwelsh.me, the Creator MBA sales page, the LinkedIn OS sales page, the Content OS sales page, the Saturday Solopreneur opt-in flow, the contact gate, the Behind-the-Scenes $1.613M launch newsletter), three specific leak points are visible from outside. None of them are foundation-level. All three are the kind of revenue lift that compounds inside a brand already running at 175K+ subscriber scale.</p>
+<p>The Creator MBA is the ceiling of your public ladder at $349. That's intentional pricing for a self-paced product, fine. The leak point is what sits above it. <strong>Nothing.</strong> 175K newsletter readers, 45K LinkedIn OS alumni, an unknown but meaningful slice of Creator MBA buyers crossing $250K-$1M ARR, and the warmest list in the solopreneur category currently has no senior tier to ascend into. Sahil Bloom runs a $20K-$30K mastermind off a comparably-sized newsletter audience. Dickie Bush and Nicolas Cole run a $1,500-$5,000 Premium Ghostwriting Academy cohort above Ship 30. Every name in your neighbourhood runs a tier above $999. You don't.</p>
+<p>The build below is sized for that. Conservative numbers. Phased over four months. Built around the funnel you already run, not against it. <strong>It does not require hiring.</strong> That part stays load-bearing.</p>
+<div class="signature">- Andrei | AG1 Consulting</div>
+</div>
+</div>
+</section>
+
+<section style="background:linear-gradient(180deg,transparent 0%,rgba(201,151,58,.03) 50%,transparent 100%)">
+<div class="container">
+<div class="eyebrow reveal">The Leak Points</div>
+<h2 class="reveal">Three Places The Funnel Currently Underconverts</h2>
+<p class="section-sub reveal">All publicly observable. Nothing fabricated about backend systems we can't see.</p>
+
+<div class="gap-grid">
+<div class="gap-card reveal">
+<span class="gap-tag critical">Critical</span>
+<h3>No VSL Or Indoctrination Video On Any Of The Three Sales Pages</h3>
+<p>The Creator MBA sales page at $349, the LinkedIn OS sales page at $99, and the Content OS sales page at $99 are all long-form text plus a curriculum bullet list. There is no embedded video on any of the three. No 6-8 minute walkthrough explaining the one-person-business thesis, the cohort of past students, the difference between the Creator MBA and a free Saturday Solopreneur essay. Cold traffic from <strong>600K+ LinkedIn followers and 175K+ newsletter readers</strong> arrives on a $349 flagship with no video bridge between the LinkedIn voice and the buy decision. The peer operators who convert long-form audiences at scale (Dan Koe's Modern Mastery walkthrough, Dickie Bush + Nicolas Cole's Ship 30 video page, Jay Clouse's Creator Science premium tier video) all run a pre-purchase video layer above the curriculum bullets. Yours is missing on all three.</p>
+<div class="fix"><strong>The Lift</strong>A 6-8 minute VSL filmed on the same studio aesthetic you already use for LinkedIn carousels. Cold-open frame, the one-person-business thesis, three Creator MBA student case studies, the curriculum walk-through, and the natural close into checkout. Same script structure replicated for LinkedIn OS and Content OS at the $99 tier. Lift compounds against every LinkedIn click-through, every newsletter CTA, every Twitter thread close, and every Instagram bio click that lands on learn.justinwelsh.me.</div>
+</div>
+
+<div class="gap-card reveal">
+<span class="gap-tag critical">Critical</span>
+<h3>No Tier Above The Creator MBA. The Ladder Ends At $349.</h3>
+<p>The current ladder ends at the $349 Creator MBA. Above that sits nothing public. No cohort, no mastermind, no done-with-you tier, no senior-operator room. 175K+ newsletter subscribers, 45,000+ LinkedIn OS alumni, an unknown but meaningful slice of Creator MBA buyers crossing $250K-$1M ARR, and the warmest list in the solopreneur category currently has no senior tier to ascend into. The peer operators who run senior tiers above flagship coursework (Sahil Bloom's mastermind at $20K-$30K, Dickie Bush + Nicolas Cole's Premium Ghostwriting Academy at $1,500-$5,000, Codie Sanchez's Contrarian Thinking peer rooms at $5K-$25K, Jay Clouse's Creator Science Lab) all run a structured cohort tier sold first to flagship-product alumni. Yours doesn't exist, and the warmest list for it currently churns sideways into "buy the same $349 product or unsubscribe."</p>
+<div class="fix"><strong>The Lift</strong>The Solopreneur Operator Cohort. Quarterly intakes of 6-10 verified solopreneurs operating $250K-$1M+ ARR at $20K-$30K per seat. Two-day in-person intake plus 90-day implementation cohort. Application-only with verified solo-revenue gate. Sells warm off the Creator MBA buyer base and the Saturday Solopreneur paid-product list. Produces case studies that compound back into Creator MBA marketing.</div>
+</div>
+
+<div class="gap-card reveal">
+<span class="gap-tag high">High Impact</span>
+<h3>The Post-Purchase Flow Off Creator MBA Is The Same As The Free Newsletter</h3>
+<p>The Saturday Solopreneur newsletter is the spine of the funnel. 175K+ subscribers receive the same weekly essay. The leak point is what happens after a $349 Creator MBA buyer completes 19 hours of self-paced video. The next email they receive is the same Saturday Solopreneur weekly essay a free subscriber gets. No segmented ascension flow. No "you finished the curriculum, here's what happens next" sequence. No identification of the 5-10% of Creator MBA buyers who'd pay $20K+ for a senior tier the moment it exists. The peer operators who run segmented post-purchase flows (Dan Koe layers Modern Mastery alumni into the private community track, Sahil Bloom segments paid-product opt-ins into the mastermind invite list, Dickie Bush feeds Ship 30 graduates into the Premium Ghostwriting Academy outreach) all run a structured post-purchase ascension layer underneath the public newsletter. Yours is missing.</p>
+<div class="fix"><strong>The Lift</strong>A segmented post-purchase nurture infrastructure under the Saturday Solopreneur main spine. 8-email Creator MBA alumni indoctrination flow into the Solopreneur Operator Cohort. Behavioural triggers identifying the verified $250K-$1M ARR slice of buyers. Re-engagement flow against unconverted Creator MBA buyers at the 60-day mark. Sponsorship-revenue track preserved separately so the main weekly send stays clean.</div>
+</div>
+</div>
+</div>
+</section>
+
+<section>
+<div class="container">
+<div class="eyebrow reveal">Market Context</div>
+<h2 class="reveal">Where Operators At Your Tier Are Already Pricing</h2>
+<p class="section-sub reveal">Five peers running flagship-to-cohort ladders in the solopreneur and creator-economy category. The senior tier is established. None of them publicly own the "one-person business" positioning the way you do.</p>
+
+<div class="market-table">
+<div class="market-row reveal">
+<div>
+<div class="market-name">Sahil Bloom (Curiosity Chronicle)</div>
+<div class="market-price">Mastermind ~$20K-$30K, invitation-based</div>
+</div>
+<div class="market-note">Closest direct comp on offer architecture: free newsletter at scale into a senior-tier mastermind sold off the warmest slice of the list. Operates a comparably-sized newsletter audience to yours and prices the senior tier at the $20K-$30K band. Proves the cohort tier converts against a solopreneur-adjacent list of your size.</div>
+</div>
+
+<div class="market-row reveal">
+<div>
+<div class="market-name">Dickie Bush + Nicolas Cole (Ship 30 + PGA)</div>
+<div class="market-price">Ship 30 $199 → Premium Ghostwriting Academy $1,500-$5,000</div>
+</div>
+<div class="market-note">Direct comp on the courseware-to-cohort ascension architecture in the writing-and-solopreneur category. $199 self-paced into a $1,500-$5,000 cohort. Proves the upgrade flow from low-ticket course to mid-ticket cohort works in your exact category. Useful structural benchmark for the post-Creator-MBA tier specifically.</div>
+</div>
+
+<div class="market-row reveal">
+<div>
+<div class="market-name">Dan Koe (Modern Mastery)</div>
+<div class="market-price">$399 self-paced + private community continuity layer</div>
+</div>
+<div class="market-note">Closest peer on price ceiling for self-paced flagship ($399 versus your $349 Creator MBA). Already runs a continuity tier underneath where you currently run none. Proves the post-flagship community layer is feature, not luxury, at this price point. His audience sits below yours, so structural cohort ceiling is structurally higher for you.</div>
+</div>
+
+<div class="market-row reveal">
+<div>
+<div class="market-name">Jay Clouse (Creator Science)</div>
+<div class="market-price">Lab membership ~$995/yr + 1-on-1 advisory work</div>
+</div>
+<div class="market-note">Direct creator-economy peer running a tiered membership above lower-priced courseware. Useful baseline for the recurring senior tier sitting between $349 self-paced and $20K cohort. Audience size below yours, but the architecture proves the ladder works.</div>
+</div>
+
+<div class="market-row reveal">
+<div>
+<div class="market-name">Codie Sanchez (Contrarian Thinking)</div>
+<div class="market-price">Peer rooms $5K-$25K, free newsletter spine</div>
+</div>
+<div class="market-note">Different niche specificity (small-business acquisition versus your one-person-business thesis), same architecture: free newsletter spine plus tiered peer-room cohort. Proves the senior peer-room model converts at $5K-$25K against a comparable newsletter-driven audience. Sets the price floor and ceiling around your cohort tier.</div>
+</div>
+</div>
+
+<div class="market-callout reveal">
+Every name above runs a senior tier or pre-priced premium intake. $20K-$30K is achievable above Sahil Bloom's anchor when the cohort is application-gated, capped at 6-10 verified solo operators, and includes two days in person plus 90-day implementation. None of them publicly own <strong>175K+ newsletter subscribers, 600K+ LinkedIn followers, and the "one-person business" positioning the rest of the category now cites back at you</strong>. The Solopreneur Operator Cohort is not invented. It's the slot the market already prices, just unfilled by you.
+</div>
+
+<div class="moat-callout reveal">
+<div class="moat-eyebrow">Your Moat, In One Sentence</div>
+<p>The "one-person business" operator. Not "creator," not "solopreneur" generically. <strong>The operator who built a 175K+ subscriber newsletter, $1.6M+ single-launch revenue, and a Forbes / Business Insider / Entrepreneur press shelf with zero employees on purpose, on a brand built around the explicit refusal to hire.</strong> Every newer operator in the category is now running variations of the playbook you publicly authored. The premium tier above all of them is not for someone copying the niche. It's for the operator who built the counter-positioning before the category existed.</p>
+</div>
+</div>
+</section>
+
+<section>
+<div class="container">
+<div class="eyebrow reveal">Asset Ownership</div>
+<h2 class="reveal">What Each LinkedIn-To-Course Visitor Actually Produces</h2>
+<p class="section-sub reveal">Same LinkedIn audience. Same newsletter spine. Different number of conversion events the asset triggers downstream once the ladder is built.</p>
+
+<div class="asset-table reveal">
+<div class="asset-row asset-header">
+<div></div>
+<div class="asset-col-label">Per visitor today</div>
+<div class="asset-col-label asset-built-label">Per visitor in this build</div>
+</div>
+<div class="asset-row">
+<div class="asset-cat">Email captured</div>
+<div class="asset-val asset-today">Yes (Saturday Solopreneur)</div>
+<div class="asset-val asset-built">Yes + segmented by buyer-stage</div>
+</div>
+<div class="asset-row">
+<div class="asset-cat">Pre-purchase video bridge</div>
+<div class="asset-val asset-today">None</div>
+<div class="asset-val asset-built">6-8 min VSL on Creator MBA + LinkedIn OS + Content OS</div>
+</div>
+<div class="asset-row">
+<div class="asset-cat">Creator MBA upsell path</div>
+<div class="asset-val asset-today">Direct checkout</div>
+<div class="asset-val asset-built">Indoctrination + Creator MBA buy-in</div>
+</div>
+<div class="asset-row">
+<div class="asset-cat">Post-Creator-MBA tier</div>
+<div class="asset-val asset-today">None</div>
+<div class="asset-val asset-built">Solopreneur Operator Cohort live</div>
+</div>
+<div class="asset-row">
+<div class="asset-cat">Post-Creator-MBA continuity</div>
+<div class="asset-val asset-today">Same weekly newsletter as free subs</div>
+<div class="asset-val asset-built">Segmented buyer flow + cohort invite track</div>
+</div>
+<div class="asset-row">
+<div class="asset-cat">After non-conversion</div>
+<div class="asset-val asset-today">Generic newsletter cadence</div>
+<div class="asset-val asset-built">Score-banded nurture by buyer-stage</div>
+</div>
+</div>
+</div>
+</section>
+
+<section style="background:linear-gradient(180deg,transparent 0%,rgba(201,151,58,.03) 50%,transparent 100%)">
+<div class="container">
+<div class="eyebrow reveal">The System</div>
+<h2 class="reveal">Four Levers We'd Pull With You</h2>
+<p class="section-sub reveal">Optimisation and ascension, not introduction. Every lever plugs into infrastructure you already operate. Nothing here asks you to rebuild the Creator MBA, rebrand the newsletter, or hire a team to maintain it.</p>
+
+<div class="phase-block reveal">
+<div class="phase-num">Lever 01<span class="month">Month 1</span></div>
+<div class="phase-content">
+<h3>Three VSLs + Segmented Post-Purchase Nurture</h3>
+<p style="margin-bottom:14px">First month builds the missing video layer across all three sales pages and the segmented post-purchase infrastructure. All three compound off audiences and traffic you already produce, no new acquisition spend yet.</p>
+<ul>
+<li>6-8 minute VSL filmed and embedded above the Creator MBA sales page: cold open, one-person-business thesis, three case studies, curriculum walk-through, close</li>
+<li>Same VSL structure replicated for LinkedIn OS ($99) and Content OS ($99) sales pages, calibrated to each product's specific outcome</li>
+<li>Segmented post-purchase nurture: 8-email Creator MBA alumni indoctrination flow into the Cohort, behavioural trigger for verified $250K-$1M ARR buyers, re-engagement flow against unconverted Creator MBA buyers at the 60-day mark</li>
+<li>Saturday Solopreneur main weekly send stays untouched. Sponsorship-revenue track preserved separately</li>
+<li>Cross-platform tracking layer: LinkedIn → newsletter conversion rate, newsletter → Creator MBA attach rate, Creator MBA → Cohort application rate, all in one dashboard</li>
+<li>A/B test instrumentation built in from day one so we measure the lift, not hope for it</li>
+</ul>
+<div class="rev-line"><strong>Outcome</strong>Three new revenue lines (VSL-converted Creator MBA buyers, VSL-converted LinkedIn OS buyers, VSL-converted Content OS buyers) layered on top of existing checkout, plus a segmented Creator MBA alumni list ready to receive the Cohort offer in Lever 02.</div>
+</div>
+</div>
+
+<div class="phase-block reveal">
+<div class="phase-num">Lever 02<span class="month">Month 2</span></div>
+<div class="phase-content">
+<h3>Premium Tier Launch (Solopreneur Operator Cohort)</h3>
+<p style="margin-bottom:14px">Lever 02 introduces the $20K-$30K Solopreneur Operator Cohort, positioned as the explicit "post-Creator-MBA" tier. Application-only, capped at 6-10 verified solo operators per intake, quarterly cadence. Sold first to Creator MBA alumni who've crossed $250K+ ARR. The first cohort lands the largest single revenue line in the build.</p>
+<ul>
+<li>Solopreneur Operator Cohort positioning, sales page, and application flow built and live</li>
+<li>Application screening rubric calibrated to "Creator MBA alumni or equivalent, verified $250K+ ARR or $20K+/mo solo revenue, building toward $1M+ without hiring"</li>
+<li>90-day post-event implementation programme structured (bi-weekly group calls plus 1-on-1 strategic access)</li>
+<li>Outreach campaign to the segmented Creator MBA alumni list from Lever 01</li>
+<li>First cohort dates locked at a NYC, Austin, or US-East venue, location confirmed once the cohort fills, run-of-show handled by the build team</li>
+<li>Two-day in-person intake, AV, catering, breakouts, including a live operator audit day-of</li>
+<li>Capstone deliverable each cohort member walks home with: a personal one-person-business operating system plus 90-day scaling plan</li>
+</ul>
+<div class="rev-line"><strong>Revenue Model</strong>6-10 seats per cohort @ $20-$30K · 4 cohorts/year · Conservative incremental: ~$540-$1.2M/yr. Sells warm off the Creator MBA alumni base.</div>
+</div>
+</div>
+
+<div class="phase-block reveal">
+<div class="phase-num">Lever 03<span class="month">Month 3</span></div>
+<div class="phase-content">
+<h3>LinkedIn-Native Paid Acquisition Layer</h3>
+<p style="margin-bottom:14px">By Lever 03 the funnel converters are live (Lever 01) and the premium tier is producing case studies and revenue (Lever 02). Now the Lever 03 paid layer compounds against a funnel that converts measurably better than it did 90 days ago. LinkedIn-primary because that's where your audience lives and works. Meta and YouTube secondary against retargeting only.</p>
+<ul>
+<li>Paid LinkedIn campaigns against your own follower base and lookalike audiences (the operator audience you already authored)</li>
+<li>Meta retargeting against newsletter subscribers and existing course buyers (warmest possible audiences)</li>
+<li>YouTube pre-roll against creator-economy keyword audiences</li>
+<li>Bank of 20-30 static and video ads written in your voice, shot in your existing studio aesthetic</li>
+<li>Daily creative iteration, weekly performance review, monthly budget reallocation</li>
+<li>UTM and pipeline attribution layered into the dashboard from Lever 01</li>
+</ul>
+<div class="rev-line"><strong>Revenue Model</strong>Compounds Lever 01 lift. Conservative ROAS 3-5x on retargeting against newsletter / Creator-MBA-buyer audiences. Spend scales with measured conversion, not hope.</div>
+</div>
+</div>
+
+<div class="phase-block reveal">
+<div class="phase-num">Lever 04<span class="month">Month 4+</span></div>
+<div class="phase-content">
+<h3>Retention + Ascension Loop</h3>
+<p style="margin-bottom:14px">Lever 04 closes the loop. The Creator MBA alumni continuity layer produces recurring revenue, referrals seed Cohort intake, and the retention layer feeds back into Creator MBA renewals and Cohort applications. By month six the system runs on its own compound, with the build team in monitoring rather than build mode.</p>
+<ul>
+<li>Creator MBA alumni continuity tier ($49-$99/mo) with monthly programming, peer rooms, and a published Justin-access cadence</li>
+<li>Referral and affiliate structure for past Creator MBA alumni to bring in next-cohort applicants</li>
+<li>Repeat-buyer flow back into Cohort for alumni who've outgrown the Creator MBA curriculum and crossed the $250K+ ARR threshold</li>
+<li>Quarterly "state of the one-person business" content drop to the alumni community, repurposed publicly afterwards</li>
+<li>Lifecycle email infrastructure across newsletter, Creator MBA, Cohort, and continuity-tier segments</li>
+</ul>
+<div class="rev-line"><strong>Revenue Model</strong>Recurring monthly community at scale plus repeat-buyer revenue. Ramps month four onward, becomes the durability layer underneath the cohort revenue.</div>
+</div>
+</div>
+</div>
+</section>
+
+<section>
+<div class="container">
+<div class="eyebrow reveal">Revenue Projection</div>
+<h2 class="reveal">What This Adds On Top Of What You Already Run</h2>
+<p class="section-sub reveal">Incremental year-one lift, layered on top of current Creator MBA, LinkedIn OS, Content OS, and Saturday Solopreneur sponsorship revenue. None of these numbers cannibalise existing income lines.</p>
+
+<div class="rev-table reveal">
+<div class="rev-row">
+<div class="rev-stream"><strong>Lever 01: Three VSLs + segmented nurture</strong>VSL-converted Creator MBA, LinkedIn OS, and Content OS buyers from existing learn.justinwelsh.me traffic</div>
+<div class="rev-amount">~$180,000+</div>
+</div>
+<div class="rev-row">
+<div class="rev-stream"><strong>Lever 02: Solopreneur Operator Cohort</strong>4 cohorts/yr · 6 seats avg @ $22,500</div>
+<div class="rev-amount">$540,000</div>
+</div>
+<div class="rev-row">
+<div class="rev-stream"><strong>Levers 03 + 04: Paid Layer + Continuity</strong>Ramps month 4-6 onward</div>
+<div class="rev-amount">upside</div>
+</div>
+<div class="rev-total">
+<div class="rev-total-label">Year-One Floor (Incremental)</div>
+<div class="rev-total-amount">~$720K</div>
+</div>
+<div class="rev-caveat"><strong>How we got here</strong>Conservative math: a 6-8 min VSL above each of three text-only sales pages lifts cold-traffic checkout conversion against the current text-only baseline. 6-seat first cohort sits at the lower end of the $20-$30K range. Real numbers calibrate against your actual funnel volume on the call.</div>
+</div>
+
+<div class="rev-note reveal">
+This is <strong>incremental on top of</strong> your existing Creator MBA, LinkedIn OS, Content OS, and Saturday Solopreneur sponsorship revenue, not a replacement of any. Lever 01 compounds your current funnel through better front-end conversion. The Solopreneur Operator Cohort is a tier you don't currently sell publicly. The paid layer and continuity tier are durability layers that ramp into year two.
+</div>
+
+<div class="rev-table premium-table reveal">
+<div class="premium-eyebrow">Premium-Only Ceiling</div>
+<p style="color:var(--muted);font-size:15px;margin-bottom:20px;max-width:none">Same plan, dialled up. Higher Lever 01 conversion lift, premium-tier Cohort pricing, paid layer running at scale by month six.</p>
+<div class="rev-row">
+<div class="rev-stream"><strong>Lever 01 (premium lift)</strong>VSL conversion at the upper end across all three sales pages · deeper buyer-stage segmentation · stronger Creator MBA attach rate</div>
+<div class="rev-amount">~$420,000+</div>
+</div>
+<div class="rev-row">
+<div class="rev-stream"><strong>Solopreneur Operator Cohort (premium)</strong>4 cohorts/yr · 8 seats avg @ $30,000</div>
+<div class="rev-amount">$960,000</div>
+</div>
+<div class="rev-row">
+<div class="rev-stream"><strong>Continuity Tier + Paid Layer (mature)</strong>Months 6-12 ramp</div>
+<div class="rev-amount">$220,000+</div>
+</div>
+<div class="rev-total">
+<div class="rev-total-label">Year-One Ceiling (Incremental)</div>
+<div class="rev-total-amount">~$1.6M</div>
+</div>
+<div class="rev-caveat"><strong>How we got here</strong>Premium math: stronger VSL lift across three pages (better script, sharper segmentation), 8-seat cohort at the top of the $30K range, continuity tier at 1,500-2,000 paying members by month 12. Real numbers calibrate to your actual conversion baselines on the call.</div>
+</div>
+</div>
+</section>
+
+<section>
+<div class="container">
+<div class="eyebrow reveal">The Picture</div>
+<h2 class="reveal">Two Versions Of December 2026</h2>
+<p class="section-sub reveal">Same starting point. Same brand. Same zero-employee constraint. Different operating system underneath.</p>
+
+<div class="contrast-grid">
+<div class="contrast-card current reveal">
+<div class="contrast-tag">If Nothing Changes</div>
+<h3>Q4 2026, Status Quo</h3>
+<ul>
+<li>Creator MBA still selling steady on a text-only sales page, no VSL</li>
+<li>LinkedIn → checkout traffic still bouncing without a video bridge</li>
+<li>LinkedIn OS and Content OS still text-only at $99 each</li>
+<li>No tier above the $349 Creator MBA</li>
+<li>175K newsletter readers and 45K LinkedIn OS alumni still receiving the same Saturday essay as free subscribers</li>
+<li>Newer "one-person business" operators continuing to cite your playbook back at you while you don't sell the senior tier</li>
+</ul>
+</div>
+<div class="contrast-card future reveal">
+<div class="contrast-tag">If We Build This</div>
+<h3>Q4 2026, System Live</h3>
+<ul>
+<li>VSL above each of the three sales pages lifting cold-traffic conversion measurably</li>
+<li>Segmented post-purchase nurture cycling Creator MBA alumni into the Cohort</li>
+<li>Three Solopreneur Operator Cohorts already run, fourth sold</li>
+<li>Continuity tier billing recurring revenue every month from Creator MBA alumni</li>
+<li>LinkedIn-native paid layer compounding against a funnel that converts better than it did in Q1</li>
+<li>Year-one incremental in the $720K-$1.6M+ range, conservative</li>
+<li>Zero employees added. The system runs against the current operator footprint.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+
+<section style="background:linear-gradient(180deg,transparent 0%,rgba(201,151,58,.03) 50%,transparent 100%)">
+<div class="container">
+<div class="eyebrow reveal">Who's Building This</div>
+<h2 class="reveal">Operator-Led, Agent-Powered</h2>
+<p class="section-sub reveal">Direct accountability through Andrei. Backed by the most current AI agent stack on the market and a UK production network. The build moves at agent-velocity, not agency-velocity. Aligns with the zero-employee constraint.</p>
+
+<div class="proof-grid">
+<div class="proof-card reveal">
+<h3>Andrei Givero</h3>
+<div class="role">Founder · AG1 Consulting</div>
+<p>UK-based operator. Background is direct-response copy, paid media, and high-ticket coaching launches. Specialty contributions: VSL scripting and production, segmented email infrastructure, paid retargeting against warm audiences, premium-tier launch architecture for operators with established flagship programmes. Direct point of accountability through the build, the launch, and the first revenue cycle.</p>
+</div>
+<div class="proof-card reveal">
+<h3>The AG1 Stack</h3>
+<div class="role">10+ AI Agents · Production Network</div>
+<p>AG1 ships with the most current AI agent stack on the market: 10+ purpose-built agents pre-deployed across VSL drafting, ad creative iteration, segmented email sequencing, audience research, copy review, and dashboard monitoring. Plus a UK-based production, editing, and paid-media network for the work that needs human hands. What takes a hand-rolled agency a quarter takes the AG1 stack a month, with the same operator on every call. Aligns with the one-person-business constraint: you don't hire, we don't bill against an account-management layer.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section style="background:linear-gradient(180deg,transparent 0%,rgba(201,151,58,.04) 50%,transparent 100%)">
+<div class="container">
+<div class="eyebrow reveal">Verified Client Results</div>
+<h2 class="reveal">Receipts, Not Headlines</h2>
+<p class="section-sub reveal">One client. Six months. Oct 2025 - Mar 2026. Numbers below pulled from Stripe and revenue-attribution dashboards. Live screenshots and source dashboards walked through on the call.</p>
+
+<div class="results-grid">
+<div class="result-card reveal"><div class="result-stat">$742K+</div><div class="result-label">Revenue generated, one client, 6 months</div></div>
+<div class="result-card reveal"><div class="result-stat">+101%</div><div class="result-label">Gross volume growth vs. prior period</div></div>
+<div class="result-card reveal"><div class="result-stat">+72%</div><div class="result-label">Total revenue growth vs. prior period</div></div>
+<div class="result-card reveal"><div class="result-stat">$306K</div><div class="result-label">Succeeded payments, single client window</div></div>
+</div>
+
+<div class="proof-disclaimer reveal"><strong>Note</strong> · Client identity withheld under NDA. Live Stripe and revenue dashboard walkthrough on the call.</div>
+</div>
+</section>
+
+<section>
+<div class="container-narrow">
+<div class="eyebrow reveal">The Offer</div>
+<h2 class="reveal">Here's What Working Together Looks Like</h2>
+<p class="section-sub reveal">Scope is fixed. Everything ships in the first 90 days. No add-ons sold separately, no surprise line items, no scope creep.</p>
+
+<div class="offer-block reveal">
+<h3>Scope</h3>
+<p class="scope-intro">Everything below is in. No retainer until the system produces. We come in for a 90-day build, hand you a launched optimisation layer, and walk you through how to run it without us if you'd rather take it in-house from there.</p>
+<ul class="scope-list">
+<li>Lever 01 front-end build: 6-8 minute VSLs filmed and embedded across Creator MBA, LinkedIn OS, and Content OS sales pages, segmented post-purchase nurture infrastructure</li>
+<li>Lever 02 premium tier: Solopreneur Operator Cohort built, sales page live, first cohort sold off Creator MBA alumni outreach</li>
+<li>Lever 03 paid layer: LinkedIn-primary, Meta retargeting, YouTube pre-roll, 20-30 ad creatives in your voice, daily iteration</li>
+<li>Lever 04 retention loop: continuity tier structure, referral architecture, repeat-buyer flows</li>
+<li>Application screening rubric and operator-fit scoring for the Cohort (verified $250K-$1M ARR gate)</li>
+<li>Two-day in-person Cohort event production for the first intake (NYC, Austin, or US-East venue, AV, run-of-show)</li>
+<li>Conversion dashboard live from week one (cold-traffic conversion, VSL completion rate, Creator MBA attach rate, Cohort application rate, paid ROAS)</li>
+<li>VSL scripts written against your voice from the LinkedIn archive, the Saturday Solopreneur back-catalogue, and your own quotes before filming</li>
+<li>All copy and creative reviewed against your published one-person-business brand voice before publishing</li>
+<li>AG1's AI agent stack (10+ purpose-built agents) pre-deployed across the workflow: VSL drafting, ad iteration, email sequencing, audience research, copy review, dashboard monitoring</li>
+<li>Andrei on the calls through launch and the first full revenue cycle</li>
+</ul>
+<div class="price-note">Investment is set on the call once we agree the plan fits. No retainer until the system produces measurable lift.</div>
+</div>
+
+<div class="anti-hype reveal">
+<div class="anti-hype-eyebrow">What This Build Is Not</div>
+<ul class="anti-hype-list">
+<li>This is not a Creator MBA rebuild. The product works, we don't touch the curriculum.</li>
+<li>This is not a Saturday Solopreneur newsletter overhaul. The weekly send and the sponsorship-revenue track stay where they are.</li>
+<li>This is not a "drop the one-person-business positioning" play. The positioning is the moat. We build around it.</li>
+<li>This is not a "hire a team to run it" pitch. The build runs against the current operator footprint. Zero employees added.</li>
+<li>This is not a six-figure-per-month-overnight pitch. The numbers above are conservative and they take a year to compound.</li>
+</ul>
+<p>What this build does promise is <strong>three VSLs above your existing sales pages, a segmented post-purchase nurture under the Saturday Solopreneur spine, a Solopreneur Operator Cohort sold first to your warmest Creator MBA alumni, and a system you own end-to-end after 90 days</strong>. That's the floor. The ceiling and the durability layer ramp from there.</p>
+</div>
+</div>
+</section>
+
+<section style="background:linear-gradient(180deg,transparent 0%,rgba(201,151,58,.03) 50%,transparent 100%)">
+<div class="container-narrow">
+<div class="eyebrow reveal">Questions</div>
+<h2 class="reveal">The Ones An Operator At Your Stage Asks</h2>
+<p class="section-sub reveal">Short, direct answers. The longer ones we cover on the call.</p>
+
+<div class="reveal">
+<div class="faq-item">
+<div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Doesn't a Cohort tier violate the one-person-business positioning?<div class="faq-toggle"></div></div>
+<div class="faq-a"><p>No. The Cohort is a quarterly four-time-a-year delivery, two days in person, 90-day implementation built around your existing weekly cadence. It does not require an employee. It does not require an ongoing fulfilment team you have to manage. The build team handles ops, AV, venue, screening, and the 90-day implementation infrastructure. You show up, run the room, and step out. Operationally it sits closer to a "speaking engagement four times a year" than a recurring fulfilment commitment. The positioning is "I built this without hiring," not "I never sell anything outside a self-paced course." Sahil Bloom runs his mastermind and still publishes a free newsletter without contradiction. Same architecture works here.</p></div>
+</div>
+
+<div class="faq-item">
+<div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How much of my time does this need?<div class="faq-toggle"></div></div>
+<div class="faq-a"><p>One day to film the three VSLs (Creator MBA, LinkedIn OS, Content OS) in a single studio block. One day to film the Cohort positioning content. Calendar holds for cohort delivery in Lever 02 (two days in person plus bi-weekly group calls for 90 days, four times a year). The rest is build team work plus you reviewing copy, creative, and pricing decisions before they ship. Most operators at your stage spend under 8 hours a month during the 90-day build, and under 2 hours a month after the system is in production. Once we hit Lever 02, plan on the four cohort-event weeks per year as the only structural commitment beyond the existing newsletter.</p></div>
+</div>
+
+<div class="faq-item">
+<div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Will the Solopreneur Operator Cohort cannibalise the Creator MBA?<div class="faq-toggle"></div></div>
+<div class="faq-a"><p>No. The Cohort and Creator MBA solve different problems. Creator MBA is self-paced curriculum for solopreneurs building toward $250K. The Cohort is strategic operating-room access for solopreneurs who already cleared the curriculum, crossed $250K-$1M ARR, and want to scale to $1M+ without hiring. Different deliverable, different audience, different buying motion. Most Cohort applicants will be Creator MBA graduates moving up the ladder, not net-new buyers choosing Cohort over Creator MBA. Where there's overlap, the Cohort is the explicit "post-Creator-MBA" tier. It expands the ladder, it doesn't compete inside it.</p></div>
+</div>
+
+<div class="faq-item">
+<div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How does this work with the Saturday Solopreneur sponsorship revenue?<div class="faq-toggle"></div></div>
+<div class="faq-a"><p>Sponsorship-revenue track stays untouched. The main weekly send to all 175K+ subscribers stays as-is. The segmented post-purchase nurture in Lever 01 runs as a separate flow off Creator MBA, LinkedIn OS, and Content OS purchase events, not against the main newsletter list. Sponsors don't notice the difference, the open rate on the main send doesn't move, and the segmented buyer flows operate underneath in parallel. The build adds revenue lines, it doesn't touch the existing ones.</p></div>
+</div>
+
+<div class="faq-item">
+<div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How quickly is there real revenue?<div class="faq-toggle"></div></div>
+<div class="faq-a"><p>Lever 01 VSL on the Creator MBA page: first measurable conversion lift in week 4-6 once the page ships. Same lift profile on LinkedIn OS and Content OS. Lever 02 first Cohort sells in month 2-3, runs in month 3-4. Lever 03 paid layer starts producing measurable ROAS by month 4. Lever 04 continuity tier ramps from month 4 onward. Most of the year-one incremental lands in months 4-12, not month one.</p></div>
+</div>
+
+<div class="faq-item">
+<div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What if the Cohort doesn't fill?<div class="faq-toggle"></div></div>
+<div class="faq-a"><p>The Cohort is sized at 6-10 seats first, sold to existing Creator MBA alumni who've crossed $250K+ ARR (the warmest list for this offer that exists). If the first intake under-fills (say, 4 confirmed instead of 6), we don't push it into a half-empty room. We pause, sharpen the positioning and the application screen, push the date by 30-45 days, and try again with a second wave of alumni outreach plus any external warm sources we can verify off the Saturday Solopreneur paid-product list. Build doesn't continue billing while the Cohort isn't running. If after a second attempt the audience isn't there at the modelled price, we restructure the tier or move the budget into Lever 03 paid acquisition.</p></div>
+</div>
+
+<div class="faq-item">
+<div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What if I want to stop after a Lever?<div class="faq-toggle"></div></div>
+<div class="faq-a"><p>You can stop at any Lever. After Lever 01 you own the three VSLs and the segmented post-purchase nurture as standalone lifts on your existing funnel. After Lever 02 you own the Cohort sales page, application flow, 90-day curriculum, and the first cohort revenue. After Lever 03 you own the paid acquisition system. Each Lever stands on its own as a fully shipped asset in case the rest stops being interesting to you.</p></div>
+</div>
+
+<div class="faq-item">
+<div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Why AG1 and not a larger agency?<div class="faq-toggle"></div></div>
+<div class="faq-a"><p>Two reasons. First, the build is specific. Most agencies sell the same growth playbook to every client (more ads, more content, more funnels). The work here is precise: three VSLs above three text-only sales pages, a segmented post-purchase nurture under an existing weekly newsletter, a premium Cohort tier launched off Creator MBA alumni, a paid layer on top of an organic engine that already converts. Second, AG1 runs on the most current AI agent stack on the market: 10+ purpose-built agents pre-deployed across VSL drafting, ad creative iteration, segmented email sequencing, audience research, and copy review. The AG1 stack does in days what a 6-person hand-rolled agency does in weeks. You get the build velocity of a 10-person team with one direct point of accountability and no account-management layer between you and the work. Aligns with the zero-employee constraint on your end as well.</p></div>
+</div>
+</div>
+</div>
+</section>
+
+<section>
+<div class="container">
+<div class="cta-section reveal">
+<div class="eyebrow">Next Step</div>
+<h2>Twenty Minutes. Four Topics.<br>You Decide From There.</h2>
+<p style="margin-bottom:24px">Here's exactly what we cover on the call, in order.</p>
+<div class="call-agenda">
+<div class="call-agenda-item"><span class="call-agenda-num">01</span><span class="call-agenda-text">Which leak point we touch first, calibrated to your existing newsletter cadence and the Creator MBA renewal cycle.</span></div>
+<div class="call-agenda-item"><span class="call-agenda-num">02</span><span class="call-agenda-text">Solopreneur Operator Cohort sizing, pricing tier, and which slice of Creator MBA alumni we'd target with the first intake outreach.</span></div>
+<div class="call-agenda-item"><span class="call-agenda-num">03</span><span class="call-agenda-text">Timing, kickoff date, and what your time commitment actually looks like over the 90-day build.</span></div>
+<div class="call-agenda-item"><span class="call-agenda-num">04</span><span class="call-agenda-text">What gets built, what stays handled by the build team, and what happens after the 90 days are up.</span></div>
+</div>
+<p style="margin-bottom:36px">The plan above is built around the funnel you already run. The numbers are conservative. The leak points are observable from outside. The only outstanding decision is whether the lift is worth a 20-minute conversation.</p>
+<a href="https://calendly.com/ag-copy/call-with-andrei" class="cta-primary" target="_blank">Book A Call</a>
+<div class="cta-sign">- Andrei | AG1 Consulting</div>
+</div>
+</div>
+</section>
+
+<footer class="footer">
+<div class="container">
+<p>Built by AG1 Consulting · This page was created exclusively for Justin Welsh · April 2026</p>
+</div>
+</footer>
+
+<a href="https://calendly.com/ag-copy/call-with-andrei" target="_blank" class="floating-cta">Book A Call</a>
+
+<script>
+const obs=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('in')),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(e=>obs.observe(e));
+</script>
+</body>
+</html>
