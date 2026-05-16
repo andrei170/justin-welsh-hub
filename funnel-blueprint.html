@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Funnel Blueprint - For Justin - AG1</title>
+<meta name="description" content="Funnel Blueprint - built for Justin Welsh by AG1 Consulting.">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="Funnel Blueprint - For Justin">
+<meta property="og:description" content="Part of the three-thing plan and less-than-7-day install built for @thejustinwelsh by AG1 Consulting.">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<script defer data-domain="andrei170.github.io" src="https://plausible.io/js/script.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-back"><span class="arrow">&larr;</span> Back to Hub</a>
+    <span class="nav-title">For Justin - AG1</span>
+  </div>
+</nav>
+
+<article class="doc">
+  <header class="doc-header">
+    <span class="doc-tag">Architecture</span>
+    <h1>Funnel Blueprint - Justin Welsh</h1>
+  </header>
+
+  
+<p><strong>Prepared:</strong> 2026-05-16
+<strong>For:</strong> Justin Welsh (@thejustinwelsh)
+<strong>Scope:</strong> Architecture diagram, tech stack, phase map, integration points, risk and mitigation. AG1 ships the infrastructure layer that wraps the existing offers. The offers themselves do not change.</p>
+<hr />
+<h2>The current state architecture</h2>
+<pre><code>LinkedIn (1M+)                X / Twitter (~572K)         Instagram (~89K)
+       |                              |                          |
+       +---------+-------------+------+------+------------+------+
+                 |                           |                   |
+                 v                           v                   v
+       Newsletter signup (Saturday Solopreneur, 175K+)
+                 |
+                 v
+       Weekly Saturday issue + sponsor inventory
+                 |
+                 v
+       (occasional in-issue promotion of a Kajabi product)
+                 |
+                 v
+       Kajabi storefront
+       /        |        \
+      v         v         v
+   LinkedIn   Content    Creator MBA
+     OS         OS       Masterclass
+   ($200)    ($200)     (Coming Soon)
+      \         |         /
+       \        |        /
+        Stripe checkout (each product its own)
+        No cross-sell. No order bump. No post-purchase upsell.
+</code></pre>
+<p>Three things are missing on the architecture diagram: cross-sell between Kajabi products, VSL bridge between newsletter and Creator MBA, scorecard plus application route above productised tier.</p>
+<hr />
+<h2>The target state architecture (post-install)</h2>
+<pre><code>LinkedIn (1M+)                X / Twitter (~572K)         Instagram (~89K)
+       |                              |                          |
+       +---------+-------------+------+------+------------+------+
+                 |
+                 v
+       Two primary CTAs side by side
+       +-----------------+      +-----------------------+
+       | Newsletter      |      | Solopreneur Stage     |
+       | signup          |      | Scorecard             |
+       +-----------------+      +-----------------------+
+                 |                          |
+                 v                          v
+       Saturday Solopreneur          Score reveal +
+       (175K+, weekly cadence)       3-line readout +
+                 |                   email capture
+                 |                          |
+                 |             +------------+------------+
+                 |             |            |            |
+                 |             v            v            v
+                 |          Stage 1      Stage 2      Stage 3
+                 |          (newsletter) (OS courses) (1-1 inquiry)
+                 |             |            |            |
+                 v             v            v            v
+       Monthly Operator Issue ----&gt; Creator MBA VSL bridge
+                                         |
+                                         v
+                              Creator MBA landing page
+                              (VSL embedded, checkout below)
+                                         |
+                                         v
+                              Stripe checkout
+                                         |
+                              +----------+----------+
+                              |                     |
+                              v                     v
+                       Post-purchase           Post-purchase
+                       sequence (LinkedIn OS    sequence (Content OS
+                       order bump + cross-sell  order bump + cross-sell
+                       to Content OS + Creator  to LinkedIn OS + Creator
+                       MBA upsell)              MBA upsell)
+                                         |
+                              5-touch cross-sell ConvertKit / Kajabi-native
+</code></pre>
+<p>Five things on the new diagram that did not exist before:
+1. The Solopreneur Stage Scorecard as the second primary CTA
+2. The score-based routing into newsletter, OS courses, or 1-1 inquiry
+3. The monthly Operator Issue routing into the Creator MBA VSL bridge
+4. The Creator MBA VSL landing page itself
+5. The cross-sell sequences on the back of every Kajabi purchase</p>
+<hr />
+<h2>Tech stack (what runs and where)</h2>
+<table>
+<thead>
+<tr>
+<th>Asset</th>
+<th>Platform</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Newsletter ESP</td>
+<td>TBD on kickoff (likely ConvertKit or beehiiv)</td>
+<td>AG1 confirms on Day 1</td>
+</tr>
+<tr>
+<td>Course platform</td>
+<td>Kajabi (confirmed via storefront crawl)</td>
+<td>Stays. Cross-sell wires inside Kajabi native flow plus ESP triggers</td>
+</tr>
+<tr>
+<td>Checkout</td>
+<td>Stripe via Kajabi</td>
+<td>Stays. Bundle pricing and order bump configured in Kajabi</td>
+</tr>
+<tr>
+<td>Scorecard surface</td>
+<td>ScoreApp or Typeform</td>
+<td>AG1 builds, ScoreApp default unless Justin prefers Typeform (note: typeform <code>uTtFirS4</code> is AG1's standard application form for kickoff inquiries, would be reused)</td>
+</tr>
+<tr>
+<td>Application form (1-1 inquiry route)</td>
+<td>Typeform <code>uTtFirS4</code> (AG1 default)</td>
+<td>Lives behind scorecard 80+ branch</td>
+</tr>
+<tr>
+<td>Calendly</td>
+<td>Justin's existing Calendly account</td>
+<td>Routes high-score inquiries to a 1-1 conversation</td>
+</tr>
+<tr>
+<td>VSL hosting</td>
+<td>Wistia or self-hosted on the Creator MBA landing page</td>
+<td>Default Wistia for conversion-rate playback</td>
+</tr>
+<tr>
+<td>Landing page hosting</td>
+<td>Webflow or static HTML on Justin's preferred host</td>
+<td>AG1 ships static HTML deploy-ready, migration to Webflow optional</td>
+</tr>
+<tr>
+<td>Analytics</td>
+<td>GA4 + Kajabi native + ESP</td>
+<td>UTM convention documented Day 1</td>
+</tr>
+<tr>
+<td>Automation glue</td>
+<td>Zapier where Kajabi-native does not reach</td>
+<td>Specifically for the ESP-to-Kajabi tag handoffs</td>
+</tr>
+</tbody>
+</table>
+<p>Nothing on the stack is exotic. Nothing requires Justin to learn a new tool. Everything sits on the platforms he already pays for plus ScoreApp / Typeform for the scorecard layer.</p>
+<hr />
+<h2>Phase map (less than 7 days from kickoff)</h2>
+<h3>Phase One - Days 1 to 3 - Cross-sell layer ships first</h3>
+<p><strong>Why first:</strong> The cross-sell layer is the lowest-risk install. It touches existing live products only. It does not gate any new offer launch. Money in the bank inside the first week.</p>
+<p><strong>Day 1:</strong>
+- Kickoff working session. Confirm Kajabi access. Confirm ESP. Confirm Stripe access (read-only). Confirm Justin's preferences on bundle pricing range.
+- Bundle pricing tier configured in Kajabi (LinkedIn OS + Content OS combined at the bundle rate)
+- Order bump configured on each individual product checkout</p>
+<p><strong>Day 2:</strong>
+- 5-touch post-purchase email sequence written (LinkedIn OS to Content OS)
+- 5-touch post-purchase email sequence written (Content OS to LinkedIn OS)
+- ConvertKit / Kajabi tagging logic mapped</p>
+<p><strong>Day 3:</strong>
+- Sequences live in ESP / Kajabi
+- Test buys run to confirm sequences fire
+- Live to the real list at end-of-day</p>
+<h3>Phase Two - Days 4 to 7 - Creator MBA VSL bridge + scorecard ship together</h3>
+<p><strong>Day 4:</strong>
+- VSL script written (6-9 minutes) and locked with Justin
+- Scorecard questions scripted (12 questions, score-reveal logic, 3-line readout copy)
+- Application form Typeform built behind the scorecard 80+ branch</p>
+<p><strong>Day 5:</strong>
+- VSL recorded (Justin's setup, half-day shoot)
+- Scorecard deployed on ScoreApp / Typeform
+- Routing logic tested (low / mid / high score routes confirmed)</p>
+<p><strong>Day 6:</strong>
+- VSL edited
+- Creator MBA landing page deployed (HTML or Webflow)
+- Bio routing updated across LinkedIn / X / IG / linktree (scorecard becomes the second primary CTA alongside newsletter)</p>
+<p><strong>Day 7:</strong>
+- Newsletter-to-VSL ConvertKit sequence wired (3-7-touch nurture from newsletter signup confirmation routing toward the VSL landing page)
+- Calendly + application-form 1-1 inquiry route tested end-to-end
+- Saturday Solopreneur Operator Issue template handed off
+- Self-serve sales page audit + handoff doc shipped</p>
+<hr />
+<h2>Integration points (the joins between systems)</h2>
+<table>
+<thead>
+<tr>
+<th>Join</th>
+<th>What flows</th>
+<th>Tool that holds the join</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Newsletter signup -&gt; nurture to VSL</td>
+<td>New subscriber tag triggers 3-7-touch sequence ending at VSL landing page</td>
+<td>ESP (ConvertKit / beehiiv) native automation</td>
+</tr>
+<tr>
+<td>Scorecard completion -&gt; ESP tag</td>
+<td>Score and stage tag pass back to ESP on email capture</td>
+<td>Zapier (ScoreApp -&gt; ConvertKit) or native if ESP supports</td>
+</tr>
+<tr>
+<td>Scorecard 80+ -&gt; application form -&gt; Calendly</td>
+<td>High-score branch routes through Typeform <code>uTtFirS4</code> and on submit routes to Calendly</td>
+<td>Typeform native redirect + Calendly link</td>
+</tr>
+<tr>
+<td>LinkedIn OS purchase -&gt; Content OS cross-sell sequence</td>
+<td>Kajabi purchase tag triggers 5-touch ESP sequence</td>
+<td>Kajabi -&gt; ESP via native or Zapier</td>
+</tr>
+<tr>
+<td>Content OS purchase -&gt; LinkedIn OS cross-sell sequence</td>
+<td>Mirror of the above</td>
+<td>Same</td>
+</tr>
+<tr>
+<td>Either OS course completion -&gt; Creator MBA upsell</td>
+<td>Kajabi completion tag triggers 5-touch ESP sequence</td>
+<td>Kajabi -&gt; ESP via native or Zapier</td>
+</tr>
+<tr>
+<td>Creator MBA VSL view -&gt; retargeting list</td>
+<td>VSL view event fires retargeting pixel for future paid lane</td>
+<td>GA4 + Meta pixel + LinkedIn Insight tag</td>
+</tr>
+<tr>
+<td>Newsletter Operator Issue click-through -&gt; VSL conversion track</td>
+<td>UTM-tagged click handled as its own conversion segment</td>
+<td>GA4 + UTM convention</td>
+</tr>
+</tbody>
+</table>
+<p>The joins are documented Day 1 and tested Day 7. The handoff doc lists every join so Justin's team can audit any single failure point.</p>
+<hr />
+<h2>Risk and mitigation</h2>
+<p><strong>Risk 01 - Kajabi cross-sell does not support the exact bundle pricing structure Justin wants.</strong>
+Mitigation: Confirm Kajabi bundle capability on Day 1 kickoff working session. If Kajabi native bundle does not match the spec, the bundle runs through a discount-code automation in the ESP plus a duplicate checkout configured for the bundle rate. Either path delivers the same buyer experience.</p>
+<p><strong>Risk 02 - ESP is not ConvertKit (beehiiv, Substack, Kit, or other) and the automation playbook needs to flex.</strong>
+Mitigation: Day 1 confirms the ESP. The 5-touch sequences are written platform-agnostic; the automation builder is whichever Justin pays for. If ESP is beehiiv with limited automation, Zapier handles the Kajabi-to-beehiiv handoff.</p>
+<p><strong>Risk 03 - Creator MBA Masterclass launch date slips and the VSL bridge sits unused.</strong>
+Mitigation: The VSL bridge does not depend on Creator MBA being live to capture value. The same VSL surface, repointed at the Operating-System courses on the back end (with re-edits), runs as a Saturday Solopreneur VSL pre-sell for LinkedIn OS or Content OS in the interim. The bridge layer earns value whether Creator MBA launches in week 2 or week 12.</p>
+<p><strong>Risk 04 - Scorecard low completion rate.</strong>
+Mitigation: Scorecard is split-tested at 8-question and 12-question lengths during Phase Two. Shorter version ships first if completion rate at 12 questions falls below a 40% benchmark on the first 500 starts. Question wording is voice-locked to Justin on Day 4.</p>
+<p><strong>Risk 05 - 1-1 inquiry lane inbound volume exceeds Justin's calendar.</strong>
+Mitigation: Application form pre-qualifies hard. Justin sets the cap (5 / 10 / 20 inquiries per quarter is his decision). The high-score routing branch routes overflow to a waitlist confirmation email, not a Calendly link. Justin controls the throughput.</p>
+<p><strong>Risk 06 - "Built without ads" brand badge sensitivity.</strong>
+Mitigation: No paid traffic runs in this engagement. Future-phase paid traffic is a separate scope conversation. The pitch on the prospect-side does not promise paid traffic as part of the Day 1 install.</p>
+<p><strong>Risk 07 - Kajabi access or technical lock-out.</strong>
+Mitigation: Kajabi admin access requested on Day 1. If access is not granted, AG1 ships specs and Justin's team installs against the specs. AG1 does not require admin access to deliver value, only to execute.</p>
+<hr />
+<h2>What ships on Day 7 (the handoff doc lists every asset)</h2>
+<table>
+<thead>
+<tr>
+<th>Asset</th>
+<th>Where it lives</th>
+<th>Owner</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cross-sell bundle pricing</td>
+<td>Kajabi</td>
+<td>AG1 deploys, Justin owns</td>
+</tr>
+<tr>
+<td>Order bump (each product)</td>
+<td>Kajabi</td>
+<td>AG1 deploys, Justin owns</td>
+</tr>
+<tr>
+<td>Post-purchase sequences (4 total)</td>
+<td>ESP</td>
+<td>AG1 deploys, Justin owns</td>
+</tr>
+<tr>
+<td>Creator MBA VSL</td>
+<td>Wistia / self-hosted</td>
+<td>AG1 produces, Justin owns</td>
+</tr>
+<tr>
+<td>Creator MBA landing page</td>
+<td>Static HTML or Webflow</td>
+<td>AG1 deploys, Justin owns</td>
+</tr>
+<tr>
+<td>Solopreneur Stage Scorecard</td>
+<td>ScoreApp / Typeform</td>
+<td>AG1 deploys, Justin owns</td>
+</tr>
+<tr>
+<td>Application form (1-1 inquiry)</td>
+<td>Typeform <code>uTtFirS4</code> style, repurposed for Justin's brand</td>
+<td>AG1 deploys, Justin owns</td>
+</tr>
+<tr>
+<td>Newsletter-to-VSL nurture (3-7 touches)</td>
+<td>ESP</td>
+<td>AG1 deploys, Justin owns</td>
+</tr>
+<tr>
+<td>Bio routing updates (4 platforms)</td>
+<td>LinkedIn / X / IG / linktree</td>
+<td>AG1 ships copy, Justin pushes</td>
+</tr>
+<tr>
+<td>Operator Issue template + topic bank (12)</td>
+<td>Google Doc handoff</td>
+<td>AG1 ships, Justin writes the issues</td>
+</tr>
+<tr>
+<td>Self-serve sales-page audit</td>
+<td>Google Doc</td>
+<td>AG1 ships</td>
+</tr>
+<tr>
+<td>UTM convention + tracking doc</td>
+<td>Google Doc</td>
+<td>AG1 ships</td>
+</tr>
+<tr>
+<td>Handoff doc (every join, every system, every login)</td>
+<td>Google Doc</td>
+<td>AG1 ships</td>
+</tr>
+</tbody>
+</table>
+<p>Every asset is owned by Justin from Day 7 onward. AG1 retains no platform access after handoff.</p>
+
+  <footer class="doc-footer">
+    <a href="index.html" class="doc-footer-link">Back to Hub</a>
+    <div class="doc-meta">Prepared 2026-05-16 &middot; Built for @thejustinwelsh</div>
+  </footer>
+</article>
+
+</body>
+</html>
